@@ -2,10 +2,7 @@ FactoryBot.define do
   factory :tutor do
     association :course
 
-    name { "Rahul" }
-
-    sequence(:email) do |n|
-      "rahul#{n}@test.com"
-    end
+    name { Faker::Name.name }
+    email { Faker::Internet.unique.email }
   end
 end

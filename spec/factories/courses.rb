@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :course do
-    name { "Ruby on Rails" }
-    description { "Backend Framework" }
+    name { Faker::Educator.course_name }
+    description { Faker::Lorem.sentence }
   end
 end
