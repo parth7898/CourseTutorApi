@@ -1,24 +1,163 @@
-# README
+# Course Tutor API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Ruby on Rails API application to manage courses and tutors.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- Create a course with multiple tutors
+- Retrieve all courses with their tutors
+- Transaction rollback if any tutor creation fails
+- JSON responses using ActiveModel Serializers
+- Request and Service test coverage using RSpec
 
-* System dependencies
+## Tech Stack
 
-* Configuration
+- Ruby 3.x
+- Ruby on Rails 7.x
+- PostgreSQL
+- RSpec
+- FactoryBot
+- Faker
+- ActiveModel Serializers
 
-* Database creation
+---
 
-* Database initialization
+## Setup
 
-* How to run the test suite
+Clone the repository
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+git clone https://github.com/parth7898/CourseTutorApi.git
+```
 
-* Deployment instructions
+Move into the project
 
-* ...
+```bash
+cd CourseTutorApi
+```
+
+Install dependencies
+
+```bash
+bundle install
+```
+
+Create database
+
+```bash
+rails db:create
+```
+
+Run migrations
+
+```bash
+rails db:migrate
+```
+
+Start the server
+
+```bash
+rails server
+```
+
+---
+
+## API Endpoints
+
+### Create Course
+
+**POST**
+
+```
+/api/v1/courses
+```
+
+Request Body
+
+```json
+{
+  "course": {
+    "name": "Ruby on Rails",
+    "description": "Backend Framework",
+    "tutors": [
+      {
+        "name": "Rahul",
+        "email": "rahul@test.com"
+      },
+      {
+        "name": "Amit",
+        "email": "amit@test.com"
+      }
+    ]
+  }
+}
+```
+
+---
+
+### Get Courses
+
+**GET**
+
+```
+/api/v1/courses
+```
+
+---
+
+## Run Tests
+
+Run all tests
+
+```bash
+bundle exec rspec
+```
+
+Run request specs
+
+```bash
+bundle exec rspec spec/requests
+```
+
+Run service specs
+
+```bash
+bundle exec rspec spec/services
+```
+
+---
+
+## Project Structure
+
+```
+app/
+├── controllers
+├── models
+├── serializers
+├── services
+
+spec/
+├── requests
+├── services
+├── factories
+```
+
+---
+
+## Testing
+
+The project includes tests for:
+
+- Course creation
+- Tutor creation
+- Validation errors
+- Duplicate tutor emails
+- Transaction rollback
+- Empty tutor list
+- Fetching all courses
+
+---
+
+## Author
+
+Parth Choudhary
