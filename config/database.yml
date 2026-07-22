@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: developer
+  password: rails
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: course_tutor_api_development
+
+test:
+  <<: *default
+  database: course_tutor_api_test
+
+production:
+  <<: *default
+  database: course_tutor_api_production
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
