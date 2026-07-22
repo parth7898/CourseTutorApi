@@ -5,10 +5,7 @@ class CourseCreationService
 
   def call
     ActiveRecord::Base.transaction do
-      course = create_course
-      create_tutors(course)
-
-      course
+      create_course
     end
   end
 
@@ -17,20 +14,19 @@ class CourseCreationService
   attr_reader :params
 
   def create_course
-    Course.create!(
+    course = Course.create!(
       name: params[:name],
       description: params[:description]
     )
+
+    create_tutors(course)
+
+    course
   end
 
   def create_tutors(course)
-    return unless params[:tutors].present?
-
-    params[:tutors].each do |tutor|
-      course.tutors.create!(
-        name: tutor[:name],
-        email: tutor[:email]
-      )
+    params[:tutors].to_a.each do |tutor|
+      course.tutors.create!(tutor)
     end
   end
 end

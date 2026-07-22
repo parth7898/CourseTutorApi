@@ -2,13 +2,13 @@ class Api::V1::CoursesController < ApplicationController
   def create
     course = CourseCreationService.new(course_params).call
 
-    render json: course, status: :created
+    render json: course, serializer: CourseSerializer, status: :created
   end
 
   def index
     courses = Course.includes(:tutors)
 
-    render json: courses, status: :ok
+    render json: courses, each_serializer: CourseSerializer, status: :ok
   end
 
   private
